@@ -8,6 +8,8 @@ async function getData(id: string) {
         },
     });
 
+    if (!response.ok) throw new Error("Невозможно получить пост!");
+
     return response.json();
 };
 

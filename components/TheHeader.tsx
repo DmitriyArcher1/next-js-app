@@ -1,13 +1,18 @@
 import Link from 'next/link';
 import React from 'react';
 import "../app/globals.css";
+import Navigation from './Navigation';
+
+const navItems = [
+    { label: "Главная", href: "/" },
+    { label: "Блог", href: "/blog" },
+    { label: "О нас", href: "/about" },
+];
 
 const TheHeader = () => {
     return (
         <header>
-            <Link className="link__item" href="/">Home</Link>
-            <Link className="link__item" href="/blog">Blog</Link>
-            <Link className="link__item" href="/about">About</Link>
+            <Navigation navLinks={navItems} />
         </header>
     );
 };

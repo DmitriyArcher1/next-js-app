@@ -1,34 +1,26 @@
+'use client';
 import { Metadata } from "next";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getAllPosts } from "../services/getPosts";
+import Posts from "@/components/Posts";
+import PostSearch from "@/components/PostSearch";
 
-async function getData() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-        next: {
-            revalidate: 60
-        }
-    });
+export default function Blog() {
+    const [posts, setPosts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    if (!response.ok) throw new Error("Unable to fetch posts!");
+    // Рендер постов на странице
+    useEffect(() => {
+        getAllPosts()
+            .then(setPosts)
+            .finally(() => setLoading(false))
+    }, [])
 
-    return response.json();
-}
-
-export const metadata: Metadata = {
-  title: "Посты | Блог",
-};
-
-export default async function Blog() {
-    const posts = await getData()
     return (
         <>
-            <h1>Blog Page</h1>
-            <ul>
-                {posts.map((post: any) => (
-                    <li key={post.id}>
-                        <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                    </li>
-                ))}
-            </ul>
+            <h1>Страница блога</h1>
+            <PostSearch onSearch={setPosts} />
+            { loading ? <h2>Загрузка...</h2> : <Posts posts={posts}/> }
         </>
     );
 };
