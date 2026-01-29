@@ -1,12 +1,21 @@
+'use client';
+import { usePosts } from '@/store';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { shallow } from 'zustand/shallow';
 
-interface Props {
-    posts: any[];
-};
+const Posts = () => {
+    const posts = usePosts((state) => state.posts);
+    const loading = usePosts((state) => state.loading);
+    const getAllPosts = usePosts((state) => state.getAllPosts);
 
-const Posts = ({posts}: Props) => {
-    return (
+    useEffect(() => {
+        getAllPosts()
+    }, [getAllPosts])
+
+    return loading 
+        ? (<h2>Загрузка...</h2>) 
+        :( 
         <div className='container'>
             <ul>
                 {posts.map((post: any) => (
