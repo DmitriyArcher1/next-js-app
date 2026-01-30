@@ -2,7 +2,6 @@
 import { usePosts } from '@/store';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
-import { shallow } from 'zustand/shallow';
 
 const Posts = () => {
     const posts = usePosts((state) => state.posts);
