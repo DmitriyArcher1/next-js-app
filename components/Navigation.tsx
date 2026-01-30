@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import "../app/globals.css";
+import { useSession, signOut } from 'next-auth/react';
 
 interface NavLink {
     label: string;
@@ -16,6 +17,9 @@ interface Props {
 
 const Navigation = ({ navLinks }: Props) => {
     const pathName = usePathname();
+    const session = useSession();
+
+    console.log(session)
     
     return (
         <>
@@ -32,6 +36,13 @@ const Navigation = ({ navLinks }: Props) => {
                     </Link>
                 )
             })}
+            {session?.data && (
+                <Link href="/profile">Профиль</Link>
+            )}
+            {session?.data 
+            ? <Link href="#" onClick={() => signOut({callbackUrl: "/"})}>Выход</Link> 
+            : <Link href="/signin">Войти</Link>
+            }
         </>
     );
 };
