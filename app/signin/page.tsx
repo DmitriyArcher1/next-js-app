@@ -7,8 +7,10 @@ export default async function Signin() {
     return (
         <div>
             <h1>Войти</h1>
-            <GoogleButton />
-            <div>or</div>
+            <div className="google__button">
+                <GoogleButton />
+            </div>
+            <div className="or__wrapper">Или</div>
             <SignInForm />
         </div>
     )

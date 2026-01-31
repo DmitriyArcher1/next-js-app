@@ -26,10 +26,12 @@ const SignInForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="email" name='email' required /> 
-            <input type="password" name='password' required />
-            <button type="submit">Войти</button>
+        <form className='auth__form' onSubmit={handleSubmit}>
+            <input type="email" name='email' placeholder='Введите email...' required /> 
+            <input type="password" name='password' placeholder='Введите пароль...' required />
+            <div className="submit__button">
+                <button type="submit">Войти</button>
+            </div>
         </form>
     );
 };

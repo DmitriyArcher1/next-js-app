@@ -5,7 +5,11 @@ export default async function Profile() {
     const session = await getServerSession(authConfig);
 
     return <div>
-        <h1>Профиль {session?.user?.name}</h1>
-        {session?.user?.image && <img  src={session.user.image} alt="" />}
+        <h1>Профиль <br /> <span style={{color: '#c97d58'}}>{session?.user?.name}</span></h1>
+        {session?.user?.image &&
+        <div className="user__image">
+            <img src={session.user.image} alt="" />
+        </div>
+        }
     </div>
 }
